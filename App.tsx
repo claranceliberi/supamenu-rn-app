@@ -20,7 +20,7 @@ export default function App() {
     return (
       <SafeAreaProvider style={tailwind('h-full')}>
         <Navigation colorScheme={colorScheme} />
-        <Text style={tw`text-md text-blue-300 tracking-wide`}>liberi</Text>
+        {/* <Text style={tw`text-md text-blue-300 tracking-wide`}>liberi</Text> */}
         <StatusBar />
       </SafeAreaProvider>
     );
