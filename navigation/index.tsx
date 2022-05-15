@@ -14,10 +14,14 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import RestaurantsScreen from '../screens/RestaurantsScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import BackButton from "../components/BackButton";
+import SearchInput from '../components/Restaurants/SearchInput';
+import CartScreen from '../screens/CartScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -81,11 +85,13 @@ function BottomTabNavigator() {
       
        <BottomTab.Screen
         name="Restaurants"
-        component={TabTwoScreen}
-        options={{
+        component={RestaurantsScreen}
+        options={({ navigation }: RootTabScreenProps<'Restaurants'>) => ({
           title: '',
+          headerLeft: ({})=> <BackButton navigation={navigation} color="orange"/>,
+          headerRight: ({})=> <SearchInput/>,
           tabBarIcon: ({ color }) => <AntDesign name="inbox" size={24} color="black" /> ,
-        }}
+        })}
       />
       
        <BottomTab.Screen
@@ -99,11 +105,12 @@ function BottomTabNavigator() {
       
        <BottomTab.Screen
         name="Cart"
-        component={TabTwoScreen}
-        options={{
+        component={CartScreen}
+        options={({ navigation }: RootTabScreenProps<'Cart'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => <AntDesign name="shoppingcart" size={24} color="black" /> ,
-        }}
+          headerLeft: ({})=> <BackButton navigation={navigation} color="orange"/>,
+          tabBarIcon: ({ color, focused }) => <AntDesign name="shoppingcart" size={24} color="black" /> ,
+        })}
       /> 
     </BottomTab.Navigator>
   );
