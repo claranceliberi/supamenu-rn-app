@@ -1,11 +1,11 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import LogoText from '../components/LogoText';
+import Logo from '../assets/images/logo.svg';
 
 export default function LandingScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <LogoText />
+      <Logo width="200" height="200" />
     </SafeAreaView>
   );
 }
