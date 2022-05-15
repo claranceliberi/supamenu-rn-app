@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, AntDesign,Ionicons, Entypo } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -58,40 +58,53 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
+        name="Home"
         component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+          title: '',
+          tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color="black" />,
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Notification"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: '',
+          tabBarIcon: ({ color }) => <Ionicons name="notifications-outline" size={24} color="black" /> ,
         }}
       />
+      
+       <BottomTab.Screen
+        name="Restaurants"
+        component={TabTwoScreen}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => <AntDesign name="inbox" size={24} color="black" /> ,
+        }}
+      />
+      
+       <BottomTab.Screen
+        name="Orders"
+        component={TabTwoScreen}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => <Entypo name="back-in-time" size={24} color="black" /> ,
+        }}
+      />
+      
+       <BottomTab.Screen
+        name="Cart"
+        component={TabTwoScreen}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => <AntDesign name="shoppingcart" size={24} color="black" /> ,
+        }}
+      /> 
     </BottomTab.Navigator>
   );
 }
