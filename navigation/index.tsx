@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { FontAwesome, AntDesign, Ionicons, Entypo } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   NavigationContainer,
@@ -20,6 +20,7 @@ import LandingScreen from '../screens/LandingScreen';
 import LoginScreen from '../screens/LoginScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import {
@@ -81,40 +82,85 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
+        name="Home"
         component={LandingScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome5
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+          title: '',
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="home" size={24} color="black" />
           ),
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Notification"
+        component={TabTwoScreen}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="notifications-outline" size={24} color="black" />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Restaurants"
+        component={TabTwoScreen}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="inbox" size={24} color="black" />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Orders"
+        component={TabTwoScreen}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <Entypo name="back-in-time" size={24} color="black" />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Cart"
+        component={TabTwoScreen}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="shoppingcart" size={24} color="black" />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Login"
         component={LoginScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: '',
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="login" size={24} color="black" />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{
+          headerShown: false,
+          title: '',
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="adduser" size={24} color="black" />
+          ),
         }}
       />
     </BottomTab.Navigator>
