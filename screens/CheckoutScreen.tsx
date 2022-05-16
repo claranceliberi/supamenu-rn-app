@@ -73,7 +73,11 @@ export default function CheckoutScreen({ navigation }: RootTabScreenProps<'Check
           </Pressable>
         </View>
         <View>
-          <View style={tw`mx-5 mt-5`}>
+
+          <View style={tw`mx-5 mt-3`}>
+                <Text style={tw`m-4 text-gray-300 text-center`}>
+                    We will send you and order details to your email after the successful payment
+                </Text>
             <Pressable>
               <View style={tw`bg-green-500 h-13 flex flex-row items-center justify-center rounded-2xl`}>
                 {/* @ts-ignore */}
