@@ -20,20 +20,19 @@ export default function SignUpScreen() {
   const { navigate } = useNavigation();
 
   const submitForm = async () => {
-    try {
-      await signup({
-        firstName,
-        lastName,
-        mobile: phoneNumber,
-        email,
-        password,
-      });
-      console.log('success');
-
-      navigate('Login');
-    } catch (error) {
-      console.log('yyyooo', error.message);
-    }
+    // try {
+    //   await signup({
+    //     firstName,
+    //     lastName,
+    //     mobile: phoneNumber,
+    //     email,
+    //     password,
+    //   });
+    //   console.log('success');
+    //   navigate('Login');
+    // } catch (error) {
+    //   console.log('yyyooo', error);
+    // }
   };
 
   return (
