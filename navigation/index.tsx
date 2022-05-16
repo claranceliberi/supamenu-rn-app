@@ -9,10 +9,11 @@ import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
+  NavigationState,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Pressable, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -29,6 +30,12 @@ import {
   RootTabScreenProps,
 } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import tw from 'twrnc';
+import BackButton from '../components/BackButton';
+import SearchInput from '../components/Restaurants/SearchInput';
+import CartScreen from '../screens/CartScreen';
+import CheckoutScreen from '../screens/CheckoutScreen';
+import RestaurantsScreen from '../screens/RestaurantsScreen';
 
 export default function Navigation({
   colorScheme,
@@ -60,6 +67,11 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="Checkout"
+        component={CheckoutScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: 'Oops!' }}
@@ -79,89 +91,223 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const isRouteActive = (activeRoute: string, state: NavigationState) => {
+    const indexOfActiveRoute = state.routeNames.indexOf(activeRoute);
+    return indexOfActiveRoute !== -1 && state.index === indexOfActiveRoute;
+  };
 
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        // tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          position: 'absolute',
+          bottom: -1,
+          elevation: 0,
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+          height: 70,
+          borderTopWidth: 0,
+          marginHorizontal: 1,
+          paddingHorizontal: 20,
+          shadowColor: '#ccc',
+          shadowOffset: {
+            width: 0,
+            height: -10,
+          },
+          shadowOpacity: 0.15,
+          shadowRadius: 10,
+        },
       }}
     >
       <BottomTab.Screen
         name="Home"
         component={LandingScreen}
-        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+        options={({ navigation, route }: RootTabScreenProps<'Home'>) => ({
           title: '',
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="home" size={24} color="black" />
-          ),
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name, navigation.getState());
+            return (
+              <View
+                style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${
+                  a ? 'bg-orange-100 ' : ''
+                }`}
+              >
+                {/* @ts-ignore */}
+                <AntDesign
+                  name="home"
+                  size={24}
+                  color={a ? 'orange' : 'black'}
+                />
+              </View>
+            );
+          },
         })}
       />
       <BottomTab.Screen
         name="Notification"
         component={TabTwoScreen}
-        options={{
+        options={({
+          navigation,
+          route,
+        }: RootTabScreenProps<'Notification'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="notifications-outline" size={24} color="black" />
-          ),
-        }}
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name, navigation.getState());
+            return (
+              <View
+                style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${
+                  a ? 'bg-orange-100 ' : ''
+                }`}
+              >
+                {/* @ts-ignore */}
+                <Ionicons
+                  name="notifications-outline"
+                  size={24}
+                  color={a ? 'orange' : 'black'}
+                />
+              </View>
+            );
+          },
+        })}
       />
 
       <BottomTab.Screen
         name="Restaurants"
-        component={TabTwoScreen}
-        options={{
+        component={RestaurantsScreen}
+        options={({
+          navigation,
+          route,
+        }: RootTabScreenProps<'Restaurants'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="inbox" size={24} color="black" />
+          headerLeft: ({}) => (
+            <BackButton navigation={navigation} color="orange" />
           ),
-        }}
+          headerRight: ({}) => <SearchInput />,
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name, navigation.getState());
+            return (
+              <View
+                style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${
+                  a ? 'bg-orange-100 ' : ''
+                }`}
+              >
+                {/* @ts-ignore */}
+                <AntDesign
+                  name="inbox"
+                  size={24}
+                  color={a ? 'orange' : 'black'}
+                />
+              </View>
+            );
+          },
+        })}
       />
 
       <BottomTab.Screen
         name="Orders"
         component={TabTwoScreen}
-        options={{
+        options={({ navigation, route }: RootTabScreenProps<'Orders'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => (
-            <Entypo name="back-in-time" size={24} color="black" />
-          ),
-        }}
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name, navigation.getState());
+            return (
+              <View
+                style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${
+                  a ? 'bg-orange-100 ' : ''
+                }`}
+              >
+                {/* @ts-ignore */}
+                <Entypo
+                  name="back-in-time"
+                  size={24}
+                  color={a ? 'orange' : 'black'}
+                />
+              </View>
+            );
+          },
+        })}
       />
 
       <BottomTab.Screen
         name="Cart"
-        component={TabTwoScreen}
-        options={{
+        component={CartScreen}
+        options={({ navigation, route }: RootTabScreenProps<'Cart'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="shoppingcart" size={24} color="black" />
+          headerLeft: ({}) => (
+            <BackButton navigation={navigation} color="orange" />
           ),
-        }}
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name, navigation.getState());
+            return (
+              <View
+                style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${
+                  a ? 'bg-orange-100 ' : ''
+                }`}
+              >
+                {/* @ts-ignore */}
+                <AntDesign
+                  name="shoppingcart"
+                  size={24}
+                  color={a ? 'orange' : 'black'}
+                />
+              </View>
+            );
+          },
+        })}
       />
       <BottomTab.Screen
         name="Login"
         component={LoginScreen}
-        options={{
+        options={({ navigation, route }: RootTabScreenProps<'Login'>) => ({
           title: '',
           headerShown: false,
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="login" size={24} color="black" />
-          ),
-        }}
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name, navigation.getState());
+            return (
+              <View
+                style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${
+                  a ? 'bg-orange-100 ' : ''
+                }`}
+              >
+                {/* @ts-ignore */}
+                <AntDesign
+                  name="login"
+                  size={24}
+                  color={a ? 'orange' : 'black'}
+                />
+              </View>
+            );
+          },
+        })}
       />
       <BottomTab.Screen
         name="Signup"
         component={SignUpScreen}
-        options={{
-          headerShown: false,
+        options={({ navigation, route }: RootTabScreenProps<'Signup'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => (
-            <AntDesign name="adduser" size={24} color="black" />
-          ),
-        }}
+          headerShown: false,
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name, navigation.getState());
+            return (
+              <View
+                style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${
+                  a ? 'bg-orange-100 ' : ''
+                }`}
+              >
+                {/* @ts-ignore */}
+                <AntDesign
+                  name="adduser"
+                  size={24}
+                  color={a ? 'orange' : 'black'}
+                />
+              </View>
+            );
+          },
+        })}
       />
     </BottomTab.Navigator>
   );

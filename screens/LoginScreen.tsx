@@ -42,7 +42,7 @@ export default function LoginScreen() {
   return (
     <View style={tw`h-[100%] bg-[#F7941D]  justify-end items-center`}>
       <ScrollView
-        style={tw`h-[85%] mt-32 w-full bg-white rounded-t-[8]`}
+        style={tw`h-[85%] mt-20 w-full bg-white rounded-t-[8]`}
         showsVerticalScrollIndicator={false}
       >
         <Logo width="200" height="100" style={tw`self-center`} />
