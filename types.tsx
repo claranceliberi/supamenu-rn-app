@@ -30,6 +30,7 @@ export type RootTabParamList = {
   Restaurants: undefined;
   Orders: undefined;
   Cart: undefined;
+  Checkout:undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
