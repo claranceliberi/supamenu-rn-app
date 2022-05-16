@@ -5,7 +5,7 @@
  */
 import { FontAwesome, AntDesign,Ionicons, Entypo } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, NavigationState } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
@@ -55,6 +55,10 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const isRouteActive = (activeRoute: string,state:NavigationState) => {
+    const indexOfActiveRoute = state.routeNames.indexOf(activeRoute);
+    return indexOfActiveRoute !== -1 && state.index === indexOfActiveRoute;
+  }
 
   return (
     <BottomTab.Navigator
@@ -65,9 +69,12 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Home"
         component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+        options={({ navigation ,route}: RootTabScreenProps<'Home'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color="black" />,
+          tabBarIcon: ({ color }) => {
+            console.log(isRouteActive(route.name,navigation.getState()));
+            return <AntDesign name="home" size={24} color="black" />
+          },
         })}
       />
       <BottomTab.Screen
