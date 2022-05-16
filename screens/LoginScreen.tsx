@@ -3,15 +3,41 @@ import Button from '../components/Button';
 import { Text, View } from '../components/Themed';
 import Logo from '../assets/images/colored-logo.svg';
 import tw from 'twrnc';
-import { Feather, FontAwesome } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import Input from '../components/Input';
 import Separator from '../components/Separator';
 import SocialButton from '../components/SocialButton';
-import { ScrollView } from 'react-native';
+import { ScrollView, ToastAndroid } from 'react-native';
+import { signin } from '../services/auth';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { navigate } = useNavigation();
+
+  const submitForm = async () => {
+    signin({
+      login: email,
+      password,
+    })
+      .then(async (res) => {
+        try {
+          await AsyncStorage.setItem('user', JSON.stringify(res.data)),
+            ToastAndroid.show(
+              `Welcome back, ${res.data.firstName}`,
+              ToastAndroid.SHORT
+            );
+          setEmail('');
+          setPassword('');
+          navigate('Home');
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .catch((error) => console.log('yyyooo', error.response));
+  };
 
   return (
     <View style={tw`h-[100%] bg-[#F7941D]  justify-end items-center`}>
@@ -43,6 +69,7 @@ export default function LoginScreen() {
           <Button
             mode={'contained'}
             style={tw`bg-[#F7941D] w-full p-[10] mt-4 normal-case`}
+            onPress={submitForm}
           >
             Sign In
           </Button>
@@ -67,7 +94,10 @@ export default function LoginScreen() {
           <Text style={tw`text-[#adacac] text-center text-sm font-bold`}>
             Don't have an account?
           </Text>
-          <Text style={tw`text-[#F7941D] text-center text-sm font-bold px-2`}>
+          <Text
+            style={tw`text-[#F7941D] text-center text-sm font-bold px-2`}
+            onPress={() => navigate('Signup')}
+          >
             Register
           </Text>
         </View>
