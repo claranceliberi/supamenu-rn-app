@@ -5,6 +5,7 @@ import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { CartItem } from '../components/Cart/CartItem';
 import tw from "twrnc";
+import { Link } from '@react-navigation/native';
 
 export default function CartScreen({ navigation }: RootTabScreenProps<'Restaurants'>) {
     const [products, setProducts] = useState([
@@ -52,9 +53,9 @@ export default function CartScreen({ navigation }: RootTabScreenProps<'Restauran
                     <Text style={tw`text-black text-[4] font-bold`}>Total</Text>
                     <Text style={tw`text-orange-500 text-[4] font-bold`}>Frw 16,000</Text>
                 </View>
-                <TouchableOpacity onPress={()=> {}} style={tw`w-full flex justify-center items-center bg-orange-500 rounded-lg py-4 px-3`}>
+                <Link to={{screen:'Checkout'}} style={tw`w-full flex justify-center items-center bg-orange-500 rounded-lg py-4 px-3`}>
                     <Text style={tw`text-white font-bold text-[3]`}>Proceed to checkout</Text>
-                </TouchableOpacity>
+                </Link>
             </ScrollView>
         </View>
     );
