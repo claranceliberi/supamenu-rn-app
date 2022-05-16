@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme, NavigationState } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Pressable, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -18,6 +18,7 @@ import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import tw from 'twrnc';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -63,6 +64,7 @@ function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
+      
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
@@ -72,45 +74,72 @@ function BottomTabNavigator() {
         options={({ navigation ,route}: RootTabScreenProps<'Home'>) => ({
           title: '',
           tabBarIcon: ({ color }) => {
-            console.log(isRouteActive(route.name,navigation.getState()));
-            return <AntDesign name="home" size={24} color="black" />
+            const a = isRouteActive(route.name,navigation.getState());
+            return <View style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${a ? 'bg-orange-100 ': ''}`}>
+              {/* @ts-ignore */}
+              <AntDesign name="home" size={24} color={a ? "orange" : "black"} />
+            </View>
           },
         })}
       />
       <BottomTab.Screen
         name="Notification"
         component={TabTwoScreen}
-        options={{
+        options={({ navigation ,route}: RootTabScreenProps<'Notification'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => <Ionicons name="notifications-outline" size={24} color="black" /> ,
-        }}
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name,navigation.getState());
+            return <View style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${a ? 'bg-orange-100 ': ''}`}>
+              {/* @ts-ignore */}
+              <Ionicons name="notifications-outline" size={24} color={a ? "orange" : "black"} />
+            </View>
+          },
+        })}
       />
       
        <BottomTab.Screen
         name="Restaurants"
         component={TabTwoScreen}
-        options={{
+        options={({ navigation ,route}: RootTabScreenProps<'Restaurants'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => <AntDesign name="inbox" size={24} color="black" /> ,
-        }}
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name,navigation.getState());
+            return <View style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${a ? 'bg-orange-100 ': ''}`}>
+              {/* @ts-ignore */}
+              <AntDesign name="inbox"  size={24} color={a ? "orange" : "black"} />
+            </View>
+          },
+        })}
       />
       
        <BottomTab.Screen
         name="Orders"
         component={TabTwoScreen}
-        options={{
+        options={({ navigation ,route}: RootTabScreenProps<'Orders'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => <Entypo name="back-in-time" size={24} color="black" /> ,
-        }}
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name,navigation.getState());
+            return <View style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${a ? 'bg-orange-100 ': ''}`}>
+              {/* @ts-ignore */}
+              <Entypo name="back-in-time" size={24} color={a ? "orange" : "black"} />
+            </View>
+          },
+        })}
       />
       
        <BottomTab.Screen
         name="Cart"
         component={TabTwoScreen}
-        options={{
+        options={({ navigation ,route}: RootTabScreenProps<'Cart'>) => ({
           title: '',
-          tabBarIcon: ({ color }) => <AntDesign name="shoppingcart" size={24} color="black" /> ,
-        }}
+          tabBarIcon: ({ color }) => {
+            const a = isRouteActive(route.name,navigation.getState());
+            return <View style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${a ? 'bg-orange-100 ': ''}`}>
+              {/* @ts-ignore */}
+              <AntDesign name="shoppingcart" size={24} color={a ? "orange" : "black"} />
+            </View>
+          },
+        })}
       /> 
     </BottomTab.Navigator>
   );
