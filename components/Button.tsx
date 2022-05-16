@@ -1,33 +1,49 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Text } from './Themed';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { Button as PaperButton } from 'react-native-paper';
+
+interface ButtonProps {
+  mode: 'contained' | 'outlined';
+  style: ViewStyle;
+  onPress: () => void;
+  children: React.ReactNode;
+}
 
 export default function Button({
-  label,
+  mode,
+  style,
   onPress,
-}: {
-  label: string;
-  onPress: () => void;
-}) {
+  children,
+  ...props
+}: ButtonProps) {
   return (
-    <TouchableOpacity style={styles.loginBtn} onPress={onPress}>
-      <Text>{label}</Text>
-    </TouchableOpacity>
+    <PaperButton
+      style={[
+        styles.button,
+        mode === 'outlined' && { backgroundColor: '#F7941D' },
+        style,
+      ]}
+      labelStyle={styles.text}
+      mode={mode}
+      onPress={onPress}
+      {...props}
+    >
+      {children}
+    </PaperButton>
   );
 }
 
 const styles = StyleSheet.create({
-  loginBtn: {
+  button: {
     width: '80%',
+    padding: 4,
     borderRadius: 5,
-    height: 50,
-    margin: '40px auto',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40,
-    fontSize: 18,
-    fontWeight: '600',
+  },
+
+  text: {
+    fontWeight: 'bold',
+    textTransform: 'none',
+    fontSize: 15,
     color: '#FFFFFF',
-    backgroundColor: '#F7941D',
   },
 });

@@ -40,6 +40,16 @@ const linking: LinkingOptions<RootStackParamList> = {
               CartScreen: 'cart',
             },
           },
+          Login: {
+            screens: {
+              LoginScreen: 'login',
+            },
+          },
+          SignUp: {
+            screens: {
+              SignUpScreen: 'signup',
+            },
+          },
         },
       },
       Modal: 'modal',

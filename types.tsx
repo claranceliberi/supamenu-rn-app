@@ -4,7 +4,10 @@
  */
 
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
+import {
+  CompositeScreenProps,
+  NavigatorScreenParams,
+} from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 declare global {
@@ -19,10 +22,8 @@ export type RootStackParamList = {
   NotFound: undefined;
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
-  RootStackParamList,
-  Screen
->;
+export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
   Home: undefined;
@@ -30,9 +31,27 @@ export type RootTabParamList = {
   Restaurants: undefined;
   Orders: undefined;
   Cart: undefined;
+  Login: undefined;
+  SignUp: undefined;
 };
 
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, Screen>,
-  NativeStackScreenProps<RootStackParamList>
->;
+export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<RootTabParamList, Screen>,
+    NativeStackScreenProps<RootStackParamList>
+  >;
+
+export type SignUp = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  mobile: string;
+  password: string;
+};
+
+export type Response<T = unknown> = {
+  data: T;
+  status: string;
+  message: string;
+  success: boolean;
+};
