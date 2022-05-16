@@ -4,5 +4,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-  corePlugins: require('tailwind-rn/unsupported-core-plugins'),
-};
+  };
