@@ -153,7 +153,7 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="SignUp"
+        name="Signup"
         component={SignUpScreen}
         options={{
           headerShown: false,

@@ -32,7 +32,7 @@ export type RootTabParamList = {
   Orders: undefined;
   Cart: undefined;
   Login: undefined;
-  SignUp: undefined;
+  Signup: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
@@ -41,11 +41,16 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     NativeStackScreenProps<RootStackParamList>
   >;
 
-export type SignUp = {
+export type Signup = {
   email: string;
   firstName: string;
   lastName: string;
   mobile: string;
+  password: string;
+};
+
+export type SignIn = {
+  login: string;
   password: string;
 };
 
@@ -55,3 +60,43 @@ export type Response<T = unknown> = {
   message: string;
   success: boolean;
 };
+
+type TokenResponse = {
+  accessToken: string;
+  tokenType: string;
+  refreshToken: string;
+  expiresInMsec: number;
+};
+
+export type LoginResponse = {
+  token: TokenResponse;
+  id: number;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  username: string;
+  mobile: string;
+  email: string;
+  status: AccountStatus;
+  authorities: {
+    authority: RoleEnum;
+  }[];
+};
+
+enum AccountStatus {
+  PENDING = 'PENDING',
+  ACTIVE = 'ACTIVE',
+  DISABLED = 'DISABLED',
+  SUSPENDED = 'SUSPENDED',
+  EXPIRED = 'EXPIRED',
+  RESET = 'RESET',
+  CLOSED = 'CLOSED',
+  PLAYED = 'PLAYED',
+  FULL = 'FULL',
+}
+
+enum RoleEnum {
+  ROLE_ADMIN = 'ROLE_ADMIN',
+  ROLE_CUSTOMER = 'ROLE_CUSTOMER',
+  SERVICE_PROVIDER = 'SERVICE_PROVIDER',
+}

@@ -45,7 +45,7 @@ const linking: LinkingOptions<RootStackParamList> = {
               LoginScreen: 'login',
             },
           },
-          SignUp: {
+          Signup: {
             screens: {
               SignUpScreen: 'signup',
             },

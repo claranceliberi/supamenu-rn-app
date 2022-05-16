@@ -7,9 +7,9 @@ import { Feather, FontAwesome } from '@expo/vector-icons';
 import Input from '../components/Input';
 import Separator from '../components/Separator';
 import SocialButton from '../components/SocialButton';
-import { ScrollView } from 'react-native';
-import signup from '../services/auth';
+import { ScrollView, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { signup } from '../services/auth';
 
 export default function SignUpScreen() {
   const [firstName, setFirstName] = useState('');
@@ -20,19 +20,27 @@ export default function SignUpScreen() {
   const { navigate } = useNavigation();
 
   const submitForm = async () => {
-    // try {
-    //   await signup({
-    //     firstName,
-    //     lastName,
-    //     mobile: phoneNumber,
-    //     email,
-    //     password,
-    //   });
-    //   console.log('success');
-    //   navigate('Login');
-    // } catch (error) {
-    //   console.log('yyyooo', error);
-    // }
+    signup({
+      firstName,
+      lastName,
+      mobile: phoneNumber,
+      email,
+      password,
+    })
+      .then(async (res) => {
+        ToastAndroid.show(
+          'Congratulations, you successful signed up',
+          ToastAndroid.SHORT
+        );
+        setFirstName('');
+        setLastName('');
+        setPhoneNumber('');
+        setEmail('');
+        setPassword('');
+
+        navigate('Login');
+      })
+      .catch((error) => console.log('yyyooo', error.response));
   };
 
   return (
@@ -110,7 +118,12 @@ export default function SignUpScreen() {
           <Text style={tw`text-[#adacac] text-center text-sm font-bold`}>
             Already have an account?
           </Text>
-          <Text style={tw`text-[#F7941D] text-center text-sm font-bold px-2`}>
+          <Text
+            style={tw`text-[#F7941D] text-center text-sm font-bold px-2`}
+            onPress={() => {
+              navigate('Login');
+            }}
+          >
             Sign In
           </Text>
         </View>
