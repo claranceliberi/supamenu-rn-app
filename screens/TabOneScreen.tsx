@@ -22,13 +22,13 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'Home'>)
     //   <EditScreenInfo path="/screens/TabOneScreen.tsx" />
     // </View>
     <View style={tw`flex-1 w-full h-full overflow-hidden`}>
-            <View>
-                <View>
-                <TouchableOpacity onPress={()=> {}} style={tw`w-full flex items-start pl-4 pt-4`}>
+            <View style={tw`rounded-b-2xl shadow-gray-100 h-[12rem] absolute left-2 right-2 shadow-green-900 shadow-2xl`}>
+                <View >
+                <TouchableOpacity onPress={()=> {}} style={tw`w-full flex items-start pl-2 pt-4`}>
                     <Ionicons name="chevron-back" size={24} style={tw`bg-green-50 rounded-xl p-3`} color="#22c55e" />
                 </TouchableOpacity>
                 </View>
-                <View style={tw`w-full flex flex-row px-4 justify-between items-center`}>
+                <View style={tw`w-full flex flex-row px-2 justify-between items-center`}>
                   <View style={tw`flex flex-row `}>
                     <Text style={tw`font-bold text-xl`}>Checkout</Text>
                     <EvilIcons name="credit-card" size={24} color="black" />
@@ -38,19 +38,19 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'Home'>)
                     <Text style={tw`text-gray-400 text-base`}>Including VAT(18%)</Text>
                   </View>
                 </View>
-                <View style={tw`mt-10 mx-5`}>
-                <View style={tw`w-full flex flex-row px-4 bg-green-400 rounded-2xl justify-evenly items-center`}>
-                  <Pressable onPress={() => setActive('card')}>
-                    <View style={tw`h-12 flex flex-row items-center rounded-2xl px-4 ${active == 'card' ? 'bg-transparent' : ''}`}>
-                      <Text style={tw`text-base font-semibold text-center ${active == 'card' ? 'text-white' : ''}`}>Credit Card</Text>
-                    </View>
-                  </Pressable>
-                  <Pressable onPress={() => setActive('mobile')}>
-                  <View style={tw`h-12 flex flex-row items-center px-4 rounded-2xl ${active == 'mobile' ? 'bg-transparent' : ''}`}>
-                      <Text style={tw`text-base font-semibold text-center ${active == 'mobile' ? 'text-white' : ''}`}>Mobile Money</Text>
-                    </View>
-                  </Pressable>
-                </View>
+                <View style={tw`mt-10 mx-5 bg-transparent`}>
+                  <View style={tw`w-full flex flex-row bg-green-400 rounded-2xl justify-evenly items-center`}>
+                    <Pressable style={tw`flex-1`} onPress={() => setActive('card')}>
+                      <View style={tw`h-14 flex flex-row items-center rounded-2xl px-2 ${active == 'card' ? '' : 'bg-transparent'}`}>
+                        <Text style={tw`text-base font-semibold text-center ${active == 'card' ? '' : 'text-white'}`}>Credit Card</Text>
+                      </View>
+                    </Pressable>
+                    <Pressable style={tw`flex-1`} onPress={() => setActive('mobile')}>
+                    <View style={tw`h-14 flex flex-row items-center px-2 rounded-2xl ${active == 'mobile' ? '' : 'bg-transparent'}`}>
+                        <Text style={tw`text-base font-semibold text-center ${active == 'mobile' ? '' : 'text-white'}`}>Mobile Money</Text>
+                      </View>
+                    </Pressable>
+                  </View>
                 </View>
             </View>
         </View>
