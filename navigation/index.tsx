@@ -14,11 +14,15 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import RestaurantsScreen from '../screens/RestaurantsScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import tw from 'twrnc';
+import BackButton from "../components/BackButton";
+import SearchInput from '../components/Restaurants/SearchInput';
+import CartScreen from '../screens/CartScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -66,7 +70,26 @@ function BottomTabNavigator() {
       initialRouteName="Home"
       
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        // tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarShowLabel:false,
+        tabBarStyle: {
+          position:'absolute',
+          bottom:-1,
+          elevation:0,
+          borderTopLeftRadius:25,
+          borderTopRightRadius:25,
+          height:70,
+          borderTopWidth:0,
+          marginHorizontal: 1,
+          paddingHorizontal: 20,
+          shadowColor:'#ccc',
+          shadowOffset:{
+            width:0,
+            height:-10
+          },
+          shadowOpacity:.15,
+          shadowRadius:10,
+        }
       }}>
       <BottomTab.Screen
         name="Home"
@@ -99,9 +122,11 @@ function BottomTabNavigator() {
       
        <BottomTab.Screen
         name="Restaurants"
-        component={TabTwoScreen}
+        component={RestaurantsScreen}
         options={({ navigation ,route}: RootTabScreenProps<'Restaurants'>) => ({
           title: '',
+          headerLeft: ({})=> <BackButton navigation={navigation} color="orange"/>,
+          headerRight: ({})=> <SearchInput/>,
           tabBarIcon: ({ color }) => {
             const a = isRouteActive(route.name,navigation.getState());
             return <View style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${a ? 'bg-orange-100 ': ''}`}>
@@ -129,9 +154,10 @@ function BottomTabNavigator() {
       
        <BottomTab.Screen
         name="Cart"
-        component={TabTwoScreen}
+        component={CartScreen}
         options={({ navigation ,route}: RootTabScreenProps<'Cart'>) => ({
           title: '',
+          headerLeft: ({})=> <BackButton navigation={navigation} color="orange"/>,
           tabBarIcon: ({ color }) => {
             const a = isRouteActive(route.name,navigation.getState());
             return <View style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${a ? 'bg-orange-100 ': ''}`}>
@@ -144,6 +170,8 @@ function BottomTabNavigator() {
     </BottomTab.Navigator>
   );
 }
+
+
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
