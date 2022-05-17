@@ -1,9 +1,15 @@
-import { StyleSheet } from 'react-native';
+import { EvilIcons, Fontisto, Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { useState } from 'react';
+import { Pressable, StyleSheet, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
+import tw from "twrnc";
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
-export default function TabOneScreen() {
+export default function TabOneScreen({ navigation }: RootTabScreenProps<'Home'>) {
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab One</Text>

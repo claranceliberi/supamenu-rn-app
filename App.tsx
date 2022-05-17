@@ -1,3 +1,4 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -11,15 +12,14 @@ import Navigation from './navigation';
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-  const tailwind = useTailwind();
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
-      <SafeAreaProvider style={tailwind('h-full')}>
+      <SafeAreaProvider >
         <Navigation colorScheme={colorScheme} />
-        <Text style={tw`text-md text-blue-300 tracking-wide`}>liberi</Text>
+        {/* <Text style={tw`text-md text-blue-300 tracking-wide`}>liberi</Text> */}
         <StatusBar />
       </SafeAreaProvider>
     );
