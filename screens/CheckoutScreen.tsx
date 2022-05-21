@@ -19,7 +19,7 @@ export default function CheckoutScreen({ navigation }: RootTabScreenProps<'Check
             <View style={tw`px-2`}>
                 <View style={tw`rounded-b-2xl shadow-gray-100 h-[12rem] shadow-green-900 shadow-2xl`}>
                     <View >
-                    <TouchableOpacity onPress={()=> {}} style={tw`w-full flex items-start pl-2 pt-4`}>
+                    <TouchableOpacity onPress={()=> navigation.goBack()} style={tw`w-full flex items-start pl-2 pt-4`}>
                         
                         <Ionicons name="chevron-back" size={24} style={tw`bg-green-50 rounded-xl p-3`} color="#22c55e" />
                     </TouchableOpacity>
