@@ -7,7 +7,7 @@ import image from '../assets/images/image.png';
 import { AntDesign } from '@expo/vector-icons'; 
 import tw from "twrnc";
 
-export default function Payment({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function Payment({ navigation }: RootTabScreenProps<'Payment'>) {
   return (
     <View style={styles.container}>
       <Image source={image} style={{width: 300, height: 300, marginBottom : 50, marginTop: -100}} />
