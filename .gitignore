@@ -15,3 +15,5 @@ web-build/
 
 yarn-error.log
 yarn.lock
+temp_auto_push.bat
+temp_interactive_push.bat
