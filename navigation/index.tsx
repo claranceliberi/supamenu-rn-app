@@ -37,6 +37,8 @@ import CheckoutScreen from '../screens/CheckoutScreen';
 import RestaurantsScreen from '../screens/RestaurantsScreen';
 import SplashScreen from '../screens/SplashScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PaymentScreen from '../screens/Payment';
+import RatingsScreen from '../screens/Ratings';
 
 export default function Navigation({
   colorScheme,
@@ -85,6 +87,21 @@ function RootNavigator() {
       <Stack.Screen
         name="Checkout"
         component={CheckoutScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Payment"
+        component={PaymentScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Rate"
+        component={RatingsScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Cart"
+        component={CartScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
