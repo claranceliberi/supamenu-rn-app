@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../components/Button';
 import { Text, View } from '../components/Themed';
-// import Logo from '../assets/images/colored-logo.svg';
+import Logo from '../assets/images/colored-logo.svg';
 import tw from 'twrnc';
 import { Feather, FontAwesome } from '@expo/vector-icons';
 import Input from '../components/Input';
@@ -44,12 +44,12 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={tw`h-[100%] bg-[#F7941D]  justify-end items-center`}>
+    <View style={tw`h-[100%] bg-[#F7941D] justify-end items-center`}>
       <ScrollView
-        style={tw`h-[85%] mt-20 w-full bg-white rounded-t-[8]`}
+        style={tw`h-[85%] mt-28 w-full bg-white rounded-t-[8]`}
         showsVerticalScrollIndicator={false}
       >
-        {/* <Logo width="200" height="100" style={tw`self-center`} /> */}
+        <Logo width="200" height="100" style={tw`mt-12 self-center`} />
         <View style={tw`justify-around items-center w-full`}>
           <Text style={tw`font-bold text-[#32416E] text-lg`}>Welcome ... </Text>
           <Text style={tw`mt-4 text-[#adacac]`}>
