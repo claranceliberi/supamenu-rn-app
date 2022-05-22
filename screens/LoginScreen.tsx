@@ -31,12 +31,12 @@ export default function LoginScreen() {
             );
           setEmail('');
           setPassword('');
-          navigate('Home');
+          navigate('Root');
         } catch (error) {
           console.log(error);
         }
       })
-      .catch((error) => console.log('yyyooo', error.response));
+      .catch((error) => console.log(error.response));
   };
 
   return (

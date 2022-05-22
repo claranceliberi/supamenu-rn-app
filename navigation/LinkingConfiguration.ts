@@ -15,11 +15,6 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          Home: {
-            screens: {
-              HomeScreen: 'home',
-            },
-          },
           Notification: {
             screens: {
               NotificationScreen: 'notification',
@@ -40,14 +35,9 @@ const linking: LinkingOptions<RootStackParamList> = {
               CartScreen: 'cart',
             },
           },
-          Login: {
+          Logout: {
             screens: {
-              LoginScreen: 'login',
-            },
-          },
-          Signup: {
-            screens: {
-              SignUpScreen: 'signup',
+              LogoutScreen: 'logout',
             },
           },
         },
