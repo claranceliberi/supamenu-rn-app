@@ -5,6 +5,7 @@ import { CartItem } from '../components/Cart/CartItem';
 import { EvilIcons, Fontisto, Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import tw from "twrnc";
+import { Link } from '@react-navigation/native';
 
 export default function CheckoutScreen({ navigation }: RootTabScreenProps<'Checkout'>) {
     navigation.setOptions({
@@ -82,7 +83,9 @@ export default function CheckoutScreen({ navigation }: RootTabScreenProps<'Check
               <View style={tw`bg-green-500 h-13 flex flex-row items-center justify-center rounded-2xl`}>
                 {/* @ts-ignore */}
                 <Fontisto name="locked" size={24} color="white" />
-                <Text style={tw`text-xl font-semibold mx-5 text-white`}>Pay for the Order</Text>
+                <Link to={{screen: 'Payment'}}>
+                 <Text style={tw`text-xl font-semibold mx-5 text-white`}>Pay for the Order</Text>
+                </Link>
               </View>
             </Pressable>
           </View>

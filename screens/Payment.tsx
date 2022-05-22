@@ -6,19 +6,20 @@ import { RootTabScreenProps } from '../types';
 import image from '../assets/images/image.png';
 import { AntDesign } from '@expo/vector-icons'; 
 import tw from "twrnc";
+import { Link } from '@react-navigation/native';
 
 export default function Payment({ navigation }: RootTabScreenProps<'Payment'>) {
   return (
     <View style={styles.container}>
-      <Image source={image} style={{width: 300, height: 300, marginBottom : 50, marginTop: -100}} />
+      <Image source={image} style={{width: 250, height: 300, marginBottom : 50, marginTop: -100}} />
       <Text style={styles.title}>Payment success, Yayy! </Text>
       <Text style={styles.mainText} >we will send order details and invoice in your contact no. and registered email</Text>
-      <Text style={tw`text-orange-300 text-xl font-semibold`} >Check details  </Text>
+      <Text style={tw`text-orange-300 text-base font-semibold`} >Check details  </Text>
       <Text style={tw`pl-40 -mt-6 mb-10`} ><AntDesign name="arrowright" size={30} style={tw`text-orange-300`} /></Text> 
-      <Text style={tw`bg-amber-500 border border-amber-500 rounded-lg w-72 h-18 p-4`}>
-        <Text style={tw`font-semibold text-2xl text-center text-white ml-6`}>Download Invoice</Text>
-        </Text>
-      <Text style={tw`mt-10 text-5xl font-bold`}>
+      <Link to={{screen: 'Rate'}} style={tw`bg-amber-500 border border-amber-500 rounded-lg w-50 h-12 p-2`}>
+        <Text style={tw`font-semibold text-base text-center text-white ml-6`}>Download Invoice</Text>
+      </Link>
+      <Text style={tw`mt-10 text-4xl font-bold`}>
         <Text style={tw`text-white `}>Supa</Text>
         <Text style={tw`text-amber-500`} >Menu</Text>
       </Text>
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
     color: 'orange',
     marginBottom: 15
@@ -46,9 +47,9 @@ const styles = StyleSheet.create({
   },
   mainText:{
     color: 'white',
-    marginRight: 60,
+    marginRight: 50,
     marginLeft:  60,
-    fontSize: 20,
+    fontSize: 14,
     marginBottom: 30,
     textAlign: 'center'
   },
