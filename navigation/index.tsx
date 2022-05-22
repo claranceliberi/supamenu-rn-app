@@ -17,7 +17,6 @@ import { ColorSchemeName, Pressable, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import LandingScreen from '../screens/LandingScreen';
 import LoginScreen from '../screens/LoginScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -36,6 +35,8 @@ import SearchInput from '../components/Restaurants/SearchInput';
 import CartScreen from '../screens/CartScreen';
 import CheckoutScreen from '../screens/CheckoutScreen';
 import RestaurantsScreen from '../screens/RestaurantsScreen';
+import SplashScreen from '../screens/SplashScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Navigation({
   colorScheme,
@@ -61,6 +62,21 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Splash"
+        component={SplashScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Signup"
+        component={SignUpScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
@@ -98,7 +114,7 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Restaurants"
       screenOptions={{
         // tabBarActiveTintColor: Colors[colorScheme].tint,
         tabBarShowLabel: false,
@@ -123,11 +139,17 @@ function BottomTabNavigator() {
       }}
     >
       <BottomTab.Screen
-        name="Home"
-        component={LandingScreen}
-        options={({ navigation, route }: RootTabScreenProps<'Home'>) => ({
+        name="Restaurants"
+        component={RestaurantsScreen}
+        options={({
+          navigation,
+          route,
+        }: RootTabScreenProps<'Restaurants'>) => ({
           title: '',
-          headerShown: false,
+          headerLeft: ({}) => (
+            <BackButton navigation={navigation} color="orange" />
+          ),
+          headerRight: ({}) => <SearchInput />,
           tabBarIcon: ({ color }) => {
             const a = isRouteActive(route.name, navigation.getState());
             return (
@@ -138,7 +160,7 @@ function BottomTabNavigator() {
               >
                 {/* @ts-ignore */}
                 <AntDesign
-                  name="home"
+                  name="inbox"
                   size={24}
                   color={a ? 'orange' : 'black'}
                 />
@@ -166,38 +188,6 @@ function BottomTabNavigator() {
                 {/* @ts-ignore */}
                 <Ionicons
                   name="notifications-outline"
-                  size={24}
-                  color={a ? 'orange' : 'black'}
-                />
-              </View>
-            );
-          },
-        })}
-      />
-
-      <BottomTab.Screen
-        name="Restaurants"
-        component={RestaurantsScreen}
-        options={({
-          navigation,
-          route,
-        }: RootTabScreenProps<'Restaurants'>) => ({
-          title: '',
-          headerLeft: ({}) => (
-            <BackButton navigation={navigation} color="orange" />
-          ),
-          headerRight: ({}) => <SearchInput />,
-          tabBarIcon: ({ color }) => {
-            const a = isRouteActive(route.name, navigation.getState());
-            return (
-              <View
-                style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${
-                  a ? 'bg-orange-100 ' : ''
-                }`}
-              >
-                {/* @ts-ignore */}
-                <AntDesign
-                  name="inbox"
                   size={24}
                   color={a ? 'orange' : 'black'}
                 />
@@ -260,11 +250,10 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="Login"
+        name="Logout"
         component={LoginScreen}
-        options={({ navigation, route }: RootTabScreenProps<'Login'>) => ({
+        options={({ navigation, route }: RootTabScreenProps<'Logout'>) => ({
           title: '',
-          headerShown: false,
           tabBarIcon: ({ color }) => {
             const a = isRouteActive(route.name, navigation.getState());
             return (
@@ -275,34 +264,13 @@ function BottomTabNavigator() {
               >
                 {/* @ts-ignore */}
                 <AntDesign
-                  name="login"
+                  name="logout"
                   size={24}
                   color={a ? 'orange' : 'black'}
-                />
-              </View>
-            );
-          },
-        })}
-      />
-      <BottomTab.Screen
-        name="Signup"
-        component={SignUpScreen}
-        options={({ navigation, route }: RootTabScreenProps<'Signup'>) => ({
-          title: '',
-          headerShown: false,
-          tabBarIcon: ({ color }) => {
-            const a = isRouteActive(route.name, navigation.getState());
-            return (
-              <View
-                style={tw`w-9 h-9 flex justify-center items-center rounded-lg ${
-                  a ? 'bg-orange-100 ' : ''
-                }`}
-              >
-                {/* @ts-ignore */}
-                <AntDesign
-                  name="adduser"
-                  size={24}
-                  color={a ? 'orange' : 'black'}
+                  onPress={() => {
+                    AsyncStorage.removeItem('user'),
+                      navigation.navigate('Login');
+                  }}
                 />
               </View>
             );

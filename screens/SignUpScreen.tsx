@@ -40,7 +40,7 @@ export default function SignUpScreen() {
 
         navigate('Login');
       })
-      .catch((error) => console.log('yyyooo', error.response));
+      .catch((error) => console.log(error.response));
   };
 
   return (
@@ -109,6 +109,7 @@ export default function SignUpScreen() {
           <Button
             mode={'contained'}
             style={tw`bg-[#F7941D] w-full p-[10] mt-4 normal-case`}
+            onPress={() => {}}
           >
             Sign In
           </Button>
@@ -120,9 +121,7 @@ export default function SignUpScreen() {
           </Text>
           <Text
             style={tw`text-[#F7941D] text-center text-sm font-bold px-2`}
-            onPress={() => {
-              navigate('Login');
-            }}
+            onPress={() => navigate('Login')}
           >
             Sign In
           </Text>
