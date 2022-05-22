@@ -5,6 +5,7 @@ import { CartItem } from '../components/Cart/CartItem';
 import { EvilIcons, Fontisto, Ionicons } from '@expo/vector-icons';
 import { Pressable, StyleSheet, TouchableHighlight, TouchableOpacity, Image } from 'react-native';
 import tw from "twrnc";
+import { Link } from '@react-navigation/native';
 
 export default function CheckoutScreen({ navigation }: RootTabScreenProps<'Checkout'>) {
     navigation.setOptions({
@@ -19,7 +20,7 @@ export default function CheckoutScreen({ navigation }: RootTabScreenProps<'Check
             <View style={tw`px-2`}>
                 <View style={tw`rounded-b-2xl shadow-gray-100 h-[12rem] shadow-green-900 shadow-2xl`}>
                     <View >
-                    <TouchableOpacity onPress={()=> {}} style={tw`w-full flex items-start pl-2 pt-4`}>
+                    <TouchableOpacity onPress={()=> navigation.goBack()} style={tw`w-full flex items-start pl-2 pt-4`}>
                         
                         <Ionicons name="chevron-back" size={24} style={tw`bg-green-50 rounded-xl p-3`} color="#22c55e" />
                     </TouchableOpacity>
@@ -73,12 +74,18 @@ export default function CheckoutScreen({ navigation }: RootTabScreenProps<'Check
           </Pressable>
         </View>
         <View>
-          <View style={tw`mx-5 mt-5`}>
+
+          <View style={tw`mx-5 mt-3`}>
+                <Text style={tw`m-4 text-gray-300 text-center`}>
+                    We will send you and order details to your email after the successful payment
+                </Text>
             <Pressable>
               <View style={tw`bg-green-500 h-13 flex flex-row items-center justify-center rounded-2xl`}>
                 {/* @ts-ignore */}
                 <Fontisto name="locked" size={24} color="white" />
-                <Text style={tw`text-xl font-semibold mx-5 text-white`}>Pay for the Order</Text>
+                <Link to={{screen: 'Payment'}}>
+                 <Text style={tw`text-xl font-semibold mx-5 text-white`}>Pay for the Order</Text>
+                </Link>
               </View>
             </Pressable>
           </View>
