@@ -1,6 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
-import Logo from '../assets/images/logo.svg';
+import { SafeAreaView, StatusBar, StyleSheet, Image } from 'react-native';
 import tw from 'twrnc';
 import { RootStackScreenProps } from '../types';
 
@@ -14,7 +13,8 @@ export default function SplashScreen({
     <SafeAreaView
       style={tw`flex flex-col h-full justify-center items-center bg-[#F7941D]`}
     >
-      <Logo width="200" height="200" />
+      {/* <Logo width="200" height="200" /> */}
+      <Image source={require('../assets/images/logo.png')} />
     </SafeAreaView>
   );
 }
