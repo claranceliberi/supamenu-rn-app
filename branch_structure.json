@@ -1,0 +1,21 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "auth",
+    "main",
+    "origin",
+    "renovate/configure"
+  ],
+  "parent": {
+    "auth": "main",
+    "main": null,
+    "origin": "main",
+    "renovate/configure": "main"
+  },
+  "order": [
+    "main",
+    "auth",
+    "origin",
+    "renovate/configure"
+  ]
+}
