@@ -7,7 +7,7 @@ import { Feather, FontAwesome } from '@expo/vector-icons';
 import Input from '../components/Input';
 import Separator from '../components/Separator';
 import SocialButton from '../components/SocialButton';
-import { ScrollView, ToastAndroid } from 'react-native';
+import { ScrollView, ToastAndroid, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { signup } from '../services/auth';
 
@@ -44,12 +44,16 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View style={tw`h-[100%] bg-[#F7941D]  justify-end items-center`}>
-      <ScrollView
-        style={tw`h-[85%] mt-20 w-full bg-white rounded-t-[8]`}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* <Logo width="200" height="100" style={tw`self-center`} /> */}
+    <ScrollView
+      style={tw`h-[100%] bg-[#F7941D]`}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={tw`h-[85%] mt-28 w-full bg-white rounded-t-[8]`}>
+        <Image
+          source={require('../assets/images/colored-logo.png')}
+          style={tw`mt-12 self-center`}
+        />
+        {/* <Logo width="200" height="100" style={tw`mt-12 self-center`} /> */}
         <View style={tw`justify-around items-center w-full`}>
           <Text style={tw`font-bold text-[#32416E] text-lg`}>Welcome ... </Text>
           <Text style={tw`mt-4 text-[#adacac]`}>
@@ -126,7 +130,7 @@ export default function SignUpScreen() {
             Sign In
           </Text>
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
